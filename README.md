@@ -1,12 +1,13 @@
-Assignment 3 - React-Bank-App
-Name
+# Assignment 3 - Bank-React-App
+
+## Name  
 Tawhidul Islam
 
-GitHub Username
+## GitHub Username  
 TawhidulIslam0
 
-Repository
+## Repository  
 https://github.com/TawhidulIslam0/assignment-3
 
-Live Website (GitHub Pages)
+## Live Website (GitHub Pages)  
 https://TawhidulIslam0.github.io/assignment-3/
