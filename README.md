@@ -1,4 +1,4 @@
-Assignment 3 - Bank-React-App
+Assignment 3 - React-Bank-App
 Name
 Tawhidul Islam
 
