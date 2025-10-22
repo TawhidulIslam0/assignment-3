@@ -21,7 +21,8 @@ const Credits = (props) => {
     <div>
       <h1>Credits</h1>
       {/* Display current account balance */}
-      <h3>Balance: ${props.accountBalance}</h3>
+      <h3>Balance: ${Number(props.accountBalance).toFixed(2)}</h3>
+
       
       {/* List of credit items */}
       <ul>
