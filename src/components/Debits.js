@@ -21,7 +21,8 @@ const Debits = (props) => {
     <div>
       <h1>Debits</h1>
       {/* Display current account balance */}
-      <h3>Balance: ${props.accountBalance}</h3>
+      <h3>Balance: ${Number(props.accountBalance).toFixed(2)}</h3>
+
       
       {/* List of debit items */}
       <ul>
