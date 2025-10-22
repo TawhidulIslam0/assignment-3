@@ -7,7 +7,6 @@ It contains the top-level state.
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-// Import other components
 import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import LogIn from './components/Login';
@@ -15,12 +14,12 @@ import Credits from './components/Credits';
 import Debits from './components/Debits';
 
 class App extends Component {
-  constructor() {  // Create and initialize state
+  constructor() {
     super(); 
     this.state = {
-      accountBalance: 0.00,  // Start balance at zero
-      creditList: [],        // Start with empty credits
-      debitList: [],         // Start with empty debits
+      accountBalance: 0.00,
+      creditList: [],
+      debitList: [],
       currentUser: {
         userName: 'Joe Smith',
         memberSince: '11/22/99',
@@ -28,14 +27,32 @@ class App extends Component {
     };
   }
 
-  // Update user's name after Log In button clicked
+  componentDidMount() {
+    fetch('https://johnnylaicode.github.io/api/credits.json')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ creditList: data }, () => {
+          this.setState({ accountBalance: this.calculateAccountBalance(this.state.creditList, this.state.debitList) });
+        });
+      })
+      .catch(err => console.error('Error fetching credits:', err));
+
+    fetch('https://johnnylaicode.github.io/api/debits.json')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ debitList: data }, () => {
+          this.setState({ accountBalance: this.calculateAccountBalance(this.state.creditList, this.state.debitList) });
+        });
+      })
+      .catch(err => console.error('Error fetching debits:', err));
+  }
+
   mockLogIn = (logInInfo) => {  
     const newUser = {...this.state.currentUser};
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser});
   }
 
-  // Add new credit and recalculate balance
   addCredit = (credit) => {
     const newCreditList = [...this.state.creditList, credit];
     this.setState({
@@ -44,7 +61,6 @@ class App extends Component {
     });
   }
 
-  // Add new debit and recalculate balance
   addDebit = (debit) => {
     const newDebitList = [...this.state.debitList, debit];
     this.setState({
@@ -53,14 +69,12 @@ class App extends Component {
     });
   }
 
-  // Calculate balance as sum of credits minus sum of debits
   calculateAccountBalance = (creditList = [], debitList = []) => {
     const totalCredits = creditList.reduce((sum, credit) => sum + credit.amount, 0);
     const totalDebits = debitList.reduce((sum, debit) => sum + debit.amount, 0);
     return (totalCredits - totalDebits).toFixed(2);
   }
 
-  // Render the app with routes and props
   render() {  
     const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
     const UserProfileComponent = () => (
@@ -85,7 +99,6 @@ class App extends Component {
     );
 
     return (
-      // basename name path
       <Router basename="/assignment-3">
         <div>
           <Route exact path="/" render={HomeComponent} />
