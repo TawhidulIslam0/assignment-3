@@ -3,14 +3,16 @@ src/components/AccountBalance.js
 
 The AccountBalance component displays account balance. It is included in other page views.
 ==================================================*/
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class AccountBalance extends Component {
-  // Display account balance
   render() {
+    // Ensure accountBalance is a number and format it to 2 decimals
+    const formattedBalance = Number(this.props.accountBalance).toFixed(2);
+
     return (
       <div>
-        Balance: {this.props.accountBalance}
+        Balance: ${formattedBalance}
       </div>
     );
   }
